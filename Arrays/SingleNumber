@@ -1,0 +1,19 @@
+//Leetcode 136 - Single Number
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        unordered_map<int, int> mp;
+
+        for (int i = 0; i < nums.size(); i++) {
+            mp[nums[i]]++;
+        }
+
+        for (auto entry : mp) {
+            if (entry.second == 1) {
+                return entry.first;
+            }
+        }
+        return -1;
+    }
+};
