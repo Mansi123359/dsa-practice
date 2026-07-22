@@ -1,0 +1,31 @@
+//Leetcode 86 - Partition List
+
+class Solution {
+public:
+    ListNode* partition(ListNode* head, int x) {
+        ListNode* smallDum = new ListNode(0);
+        ListNode* larDum = new ListNode(0);
+
+        ListNode* smallTail = smallDum;
+        ListNode* larTail = larDum;
+
+        ListNode* curr = head;
+
+        while(curr){
+            ListNode* nextN = curr->next;
+            if(curr->val < x){
+                smallTail->next = curr;
+                smallTail = curr;
+            }
+            else{
+                larTail->next = curr;
+                larTail = curr;
+            }
+            curr = nextN;
+        }
+        larTail->next = NULL;
+        smallTail->next = larDum->next;
+        return smallDum->next;
+
+    }
+};
