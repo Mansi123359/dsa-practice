@@ -1,0 +1,26 @@
+//Leetcode 2265 - Count Nodes Equal to Average of Subtree
+
+class Solution {
+public:
+    int findSum(TreeNode* root, int &count) {
+        if(root==NULL) return 0;
+        count++;
+        int lsum = findSum(root->left,count);
+        int rsum = findSum(root->right,count);
+
+        return lsum+rsum+root->val;
+    }
+
+    int averageOfSubtree(TreeNode* root){
+        if(root==NULL) return 0;
+        int count = 0;
+        int result = 0;
+        int sum = findSum(root,count);
+        if(root->val == sum/count){
+            result++;
+        } 
+        result+=averageOfSubtree(root->left);
+        result+=averageOfSubtree(root->right);
+        return result;
+    }   
+};
